@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Higgs — the field that gives things mass</title>
+<style>
+  :root{
+    --bg:#0a0710; --panel:#140d20; --edge:#2e2148; --ink:#ece3f7; --dim:#9a86bd; --faint:#6b5a8c;
+    --violet:#a78bfa; --violet2:#c4b5fd; --glow:#7c3aed; --field:#7c3aed; --massless:#34d399;
+    --heavy:#fb7185; --boson:#fbbf24;
+    --mono:'SFMono-Regular',ui-monospace,Menlo,Consolas,monospace;
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.55;
+    background-image:radial-gradient(1100px 560px at 70% -10%,#1a1030 0%,transparent 60%),
+      radial-gradient(900px 520px at 0% 100%,#150b28 0%,transparent 55%);}
+  .wrap{max-width:1000px;margin:0 auto;padding:42px 26px 90px}
+  header{border-bottom:1px solid var(--edge);padding-bottom:22px;margin-bottom:30px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--violet);opacity:.9}
+  h1{font-size:32px;line-height:1.13;margin:.32em 0 .18em;font-weight:600}
+  h1 em{color:var(--violet2);font-style:italic}
+  .sub{color:var(--dim);font-size:15.5px;max-width:78ch}
+  .lin{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:14px}
+  .lin b{color:var(--violet);font-weight:500}
+  section{margin:38px 0}
+  h2{font-size:13px;font-family:var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--violet2);
+    border-left:2px solid var(--glow);padding-left:11px;margin:0 0 6px}
+  .lede{color:var(--dim);font-size:15px;margin:0 0 18px;max-width:80ch}
+  .lede b{color:var(--violet2);font-weight:400}
+  .panel{background:linear-gradient(180deg,var(--panel),#100a1b);border:1px solid var(--edge);border-radius:14px;
+    padding:20px;box-shadow:0 1px 0 #2e2148 inset,0 24px 60px -40px #000}
+  .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:12px}
+  .controls .lbl{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:2px}
+  button{font-family:var(--mono);font-size:12px;color:var(--ink);background:#241738;border:1px solid var(--edge);
+    border-radius:8px;padding:7px 11px;cursor:pointer;transition:.15s}
+  button:hover{background:#2e1f48;border-color:var(--violet)}
+  button.on{background:var(--glow);border-color:var(--violet2);color:#fff}
+  canvas{display:block;border-radius:10px;background:#08050f;border:1px solid var(--edge);max-width:100%;margin:0 auto}
+  .cap{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:9px;text-align:center}
+  .read{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:12px;align-items:center}
+  .st .v{font-family:var(--mono);font-size:19px;font-weight:600}
+  .st .k{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:center}
+  .note{color:var(--dim);font-size:13.5px;border-left:2px solid var(--edge);padding-left:13px;margin:16px 0 0}
+  .note b{color:var(--violet2);font-weight:400}
+  code{font-family:var(--mono);font-size:.9em;color:var(--violet2);background:#170f28;padding:1px 5px;border-radius:5px}
+  footer{margin-top:42px;border-top:1px solid var(--edge);padding-top:18px;color:var(--faint);font-family:var(--mono);font-size:11px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Purple Paper - side-sheet - the field that fills everything</div>
+  <h1>The Higgs - the field that gives things <em>mass</em></h1>
+  <div class="sub">When the universe began, nothing had mass - everything raced at the speed of light, and nothing could
+    ever sit still or clump into a star. Then one field, switched on everywhere, started slowing some particles off the
+    wall. How strongly a particle talks to that field is exactly how much mass it gets. The ones that ignore it stay at
+    the wall forever. This is the bouncer at the speed-of-light wall - and the boson is just the proof the field is there.</div>
+  <div class="lin"><b>Brout · Englert · Higgs (+ Guralnik, Hagen, Kibble), 1964</b> · boson confirmed at CERN 4 July 2012, ~125 GeV ·
+    one in a billion collisions · lives 1.6×10⁻²² s · the curse runs young this time</div>
+</header>
+
+<section>
+  <h2>The field - drag a particle through it</h2>
+  <p class="lede">Space is filled with the <span style="color:var(--violet2)">Higgs field</span> (the glowing
+    background - it's never zero, even in vacuum). Pick a particle and move it. The <span
+    style="color:var(--massless)">photon</span> ignores the field and glides at the wall, massless. The <span
+    style="color:var(--heavy)">top quark</span> drags through it, heavily coupled - hard to start, hard to stop:
+    that's mass. <b>Mass isn't drag</b> (it wouldn't coast if it were) - it's how strongly the particle couples to the
+    ever-present field, shown here as how reluctantly it changes motion.</p>
+
+  <div class="panel">
+    <div class="controls">
+      <span class="lbl">particle:</span>
+      <button id="p_photon" class="on">photon (massless)</button>
+      <button id="p_electron">electron (light)</button>
+      <button id="p_top">top quark (heavy)</button>
+      <span style="width:10px"></span>
+      <button id="field" class="on">Higgs field: ON</button>
+    </div>
+
+    <canvas id="cv" width="620" height="300"></canvas>
+    <div class="cap">move your mouse / finger across the field · the particle chases the cursor ·
+      coupling to the field = how sluggishly it follows = its mass</div>
+
+    <div class="read">
+      <div class="st"><div class="v" id="coupling" style="color:var(--violet2)">0</div><div class="k">coupling to field</div></div>
+      <div class="st"><div class="v" id="mass" style="color:var(--heavy)">0</div><div class="k">resulting mass</div></div>
+      <div class="st"><div class="v" id="speed" style="color:var(--massless)">c</div><div class="k">can it reach the wall?</div></div>
+    </div>
+
+    <div class="note" id="readnote">The photon doesn't couple to the Higgs field at all - so it never slows, never
+      sits still, and is pinned to the speed-of-light wall forever. No mass, no rest. It <em>is</em> the wall.</div>
+  </div>
+</section>
+
+<section>
+  <h2>The boson - make a wave to prove the field</h2>
+  <p class="lede">You can't see the field directly. But hit it hard enough - concentrate enough energy in one tiny spot -
+    and you make it <em>ripple</em>. One quantum of that ripple is the <span style="color:var(--boson)">Higgs
+    boson</span>. Finding it (CERN, 2012) was how we proved the field is real: you can't see the ocean's water, but if
+    you can make a wave, there's water. Crank the collision energy and watch for the splash.</p>
+
+  <div class="panel">
+    <div class="controls">
+      <span class="lbl">collision energy:</span>
+      <input type="range" id="energy" min="0" max="100" value="20" style="accent-color:var(--boson);width:200px">
+      <span id="eL" class="mono" style="color:var(--boson)">2.6 TeV</span>
+      <button id="smash" class="on">▶ colliding</button>
+    </div>
+    <canvas id="coll" width="620" height="220"></canvas>
+    <div class="cap">two protons (near light-speed) collide · energy condenses into new mass (E=mc²) ·
+      past ~125 GeV the <span style="color:var(--boson)">Higgs ripple</span> can appear - in ~1 of a billion hits</div>
+    <div class="note" id="collnote">Below the threshold: the collisions make sprays of ordinary particles, but never
+      enough concentrated energy to ripple the Higgs field. Turn the energy up.</div>
+  </div>
+</section>
+
+<section>
+  <h2>What it actually means</h2>
+  <p class="lede">Three honest points, including the one most explanations get wrong.</p>
+
+  <div class="note"><b>Mass is not drag.</b> The molasses picture is wrong - drag would slow a coasting particle to a
+    stop, but mass doesn't (a massive thing coasts forever). Mass is <em>resistance to changing motion</em>: a particle
+    coupled to the Higgs field can't ride the speed-of-light wall, has a rest frame, can sit still. The coupling
+    strength sets the mass. Photon couples zero → massless → stuck at <code>c</code>. Top quark couples hard → heaviest
+    known particle.</div>
+
+  <div class="note" style="margin-top:14px"><b>It's why there's matter at all.</b> With no Higgs field every particle
+    would be massless, racing at <code>c</code>, never able to sit still or bind. No atoms, no stars, no you. The field
+    switching on (a fraction of a second after the Big Bang) is what let particles slow down and clump. It's the
+    bouncer that pulls things off the wall so they can become <em>stuff</em>.</div>
+
+  <div class="note" style="margin-top:14px"><b>But it's not the source of most of your weight.</b> The Higgs gives the
+    <em>fundamental</em> particles (quarks, electrons) their rest mass - but ~99% of <em>your</em> mass is the binding
+    energy of gluons and quarks racing inside your protons (E=mc² again). The Higgs sets the mass of the bricks; the
+    bulk of you is the energy holding the bricks together. "The Higgs gives everything mass" is an overstatement - it
+    gives the elementary particles theirs, and that's profound enough.</div>
+
+  <div class="note" style="margin-top:14px;font-size:13px">Confirmed against current sources: BEH mechanism proposed
+    1964 by three independent teams; boson observed 4 July 2012 by ATLAS (126.0±0.6 GeV) and CMS (125.3±0.6 GeV), each
+    at ~5σ - two independent witnesses agreeing (the commitment box, in physics). Appears in ~1 in a billion collisions;
+    lifetime ~1.6×10⁻²² s; spin 0, no charge. Nobel 2013 to Englert and Higgs (Brout had died in 2011).</div>
+</section>
+
+<footer>
+  THE HIGGS - purple paper side-sheet - the field that gives things mass, the boson that proves it<br>
+  Brout-Englert-Higgs mechanism 1964 · boson at CERN 4 July 2012, ~125 GeV, 5σ in two independent detectors · 1-in-a-billion, lifetime 1.6×10⁻²² s<br>
+  mass = coupling to the field, not drag · the bouncer at the c wall · the curse runs young: idea 1964, proof 2012, a 48-year wait
+</footer>
+
+<script>
+"use strict";
+const DIMS={ cv:[620,300], coll:[620,220] };
+function fit(c){ const [W,H]=DIMS[c.id]||[c.width,c.height]; const dpr=window.devicePixelRatio||1;
+  const need=Math.round(W*dpr); if(c.width!==need){ c.width=need; c.height=Math.round(H*dpr); c.style.width=W+'px'; c.style.height=H+'px'; }
+  const g=c.getContext('2d'); g.setTransform(dpr,0,0,dpr,0,0); return {g,w:W,h:H}; }
+let CLOCK=0;
+
+// ---- field + particle ----
+const PARTS={ photon:{coupling:0, mass:0, col:'#34d399', label:'photon'},
+  electron:{coupling:0.18, mass:0.5, col:'#a78bfa', label:'electron'},
+  top:{coupling:0.95, mass:173, col:'#fb7185', label:'top quark'} };
+let part='photon', fieldOn=true, target=[310,150], pos=[310,150], vel=[0,0];
+
+function drawField(){
+  const {g,w,h}=fit(document.getElementById('cv')); g.clearRect(0,0,w,h);
+  const P=PARTS[part];
+  // Higgs field background: shimmering lattice (never zero)
+  if(fieldOn){ const t=CLOCK*0.02;
+    g.globalAlpha=1;
+    for(let x=18;x<w;x+=26){ for(let y=18;y<h;y+=26){
+      const ph=Math.sin(x*0.05+t)+Math.cos(y*0.05+t*1.3);
+      const a=0.10+0.10*(ph+2)/4;
+      g.fillStyle='#7c3aed'; g.globalAlpha=a; g.beginPath(); g.arc(x,y,2.0+1.2*(ph+2)/4,0,7); g.fill();
+    } } g.globalAlpha=1;
+    g.fillStyle='#6b5a8c'; g.font='10px ui-monospace,monospace'; g.textAlign='left'; g.fillText('Higgs field — nonzero everywhere, even in vacuum', 12, h-12);
+  } else { g.fillStyle='#46356b'; g.font='11px ui-monospace,monospace'; g.textAlign='center'; g.fillText('field OFF — all particles massless, all pinned to c', w/2, h-14); }
+
+  // dynamics: heavier coupling => more inertia (sluggish follow). massless => snaps instantly (rides the wall).
+  const coupling = fieldOn ? P.coupling : 0;
+  const inertia = 1 + coupling*40;        // mass-like resistance to acceleration
+  const k=0.06;
+  for(let i=0;i<2;i++){ const ax=(target[i]-pos[i])*k/inertia; vel[i]=(vel[i]+ax)*0.86; pos[i]+=vel[i]; }
+  // wake in the field (heavier = bigger disturbance)
+  if(fieldOn && coupling>0){ g.strokeStyle=P.col; g.globalAlpha=0.18; 
+    for(let r=1;r<=3;r++){ g.lineWidth=1; g.beginPath(); g.arc(pos[0],pos[1], 10+r*9*coupling + (CLOCK*0.4%9), 0,7); g.stroke(); } g.globalAlpha=1; }
+  // the particle
+  g.fillStyle=P.col; g.shadowColor=P.col; g.shadowBlur=part==='photon'?16:8;
+  g.beginPath(); g.arc(pos[0],pos[1], part==='top'?12:8, 0,7); g.fill(); g.shadowBlur=0;
+  g.fillStyle='#08050f'; g.font='bold 9px ui-monospace,monospace'; g.textAlign='center'; g.textBaseline='middle';
+  g.fillText(part==='photon'?'γ':(part==='top'?'t':'e'), pos[0],pos[1]); g.textBaseline='alphabetic';
+
+  // readouts
+  document.getElementById('coupling').textContent = (coupling).toFixed(2);
+  document.getElementById('mass').textContent = fieldOn? (part==='photon'?'0':(part==='electron'?'0.5 MeV':'173 GeV')) : '0';
+  const sp=document.getElementById('speed');
+  if(!fieldOn || part==='photon'){ sp.textContent='YES = c'; sp.style.color='#34d399'; }
+  else { sp.textContent='never'; sp.style.color='#fb7185'; }
+  const rn=document.getElementById('readnote');
+  if(!fieldOn){ rn.innerHTML='Field off: every particle is massless and pinned to the wall - <b>nothing can sit still or clump.</b> This is the universe before the Higgs switched on: all light, no matter.'; }
+  else if(part==='photon'){ rn.innerHTML='The photon doesn\'t couple to the Higgs field at all - it never slows, never rests, pinned to the speed-of-light wall forever. <b>No mass. It is the wall.</b>'; }
+  else if(part==='electron'){ rn.innerHTML='The electron couples weakly - a little mass, follows your cursor with slight lag. Light enough to whip around inside atoms, heavy enough to be <em>held</em> by them.'; }
+  else { rn.innerHTML='The top quark couples almost maximally - the heaviest known particle, sluggish and reluctant, dragging a deep wake in the field. <b>Hard to start, hard to stop: that\'s mass.</b>'; }
+  requestAnimationFrame(drawField);
+}
+
+// ---- collider ----
+let energy=0.2, smashing=true, flash=0, gotHiggs=false, hitTimer=0;
+function drawColl(){
+  const {g,w,h}=fit(document.getElementById('coll')); g.clearRect(0,0,w,h);
+  const cx=w/2, cy=h/2;
+  const E_GeV = energy*energy*13000; // up to 13 TeV
+  // two protons approaching
+  const approach=(CLOCK*3)% 120;
+  const px=Math.min(cx-12, 30+approach*((cx-42)/120));
+  if(smashing){
+    g.fillStyle='#22d3ee'; g.beginPath(); g.arc(px,cy,7,0,7); g.fill();
+    g.beginPath(); g.arc(w-px,cy,7,0,7); g.fill();
+    g.strokeStyle='#22d3ee'; g.globalAlpha=.3; g.lineWidth=1; g.beginPath(); g.moveTo(40,cy); g.lineTo(cx-14,cy); g.moveTo(w-40,cy); g.lineTo(cx+14,cy); g.stroke(); g.globalAlpha=1;
+    if(approach>=118){ flash=1; hitTimer=24; gotHiggs = (E_GeV>125 && Math.random()<0.05+0.4*energy); }
+  }
+  // collision flash + spray
+  if(hitTimer>0){ hitTimer--;
+    const n = Math.floor(8+energy*30);
+    for(let i=0;i<n;i++){ const a=i/n*2*Math.PI + CLOCK*0.1; const r=(24-hitTimer)*4+8;
+      g.fillStyle='#9a86bd'; g.globalAlpha=Math.max(0,hitTimer/24);
+      g.beginPath(); g.arc(cx+Math.cos(a)*r, cy+Math.sin(a)*r*0.7, 2, 0,7); g.fill(); }
+    g.globalAlpha=1;
+    // Higgs ripple if produced
+    if(gotHiggs){ g.strokeStyle='#fbbf24'; g.lineWidth=2.5; g.globalAlpha=Math.max(0,hitTimer/24);
+      g.beginPath(); g.arc(cx,cy,(24-hitTimer)*5,0,7); g.stroke(); g.globalAlpha=1;
+      g.fillStyle='#fbbf24'; g.shadowColor='#fbbf24'; g.shadowBlur=14; g.beginPath(); g.arc(cx,cy,9,0,7); g.fill(); g.shadowBlur=0;
+      g.fillStyle='#1a0a02'; g.font='bold 10px ui-monospace,monospace'; g.textAlign='center'; g.textBaseline='middle'; g.fillText('H',cx,cy); g.textBaseline='alphabetic'; }
+  }
+  // energy threshold marker
+  g.fillStyle='#6b5a8c'; g.font='10px ui-monospace,monospace'; g.textAlign='left';
+  g.fillText('collision energy: '+(E_GeV<1000?E_GeV.toFixed(0)+' GeV':(E_GeV/1000).toFixed(1)+' TeV')+(E_GeV>125?'  ✓ above Higgs mass (125 GeV)':'  ✗ below 125 GeV'), 12, 18);
+  document.getElementById('eL').textContent = (E_GeV<1000?E_GeV.toFixed(0)+' GeV':(E_GeV/1000).toFixed(1)+' TeV');
+  const cn=document.getElementById('collnote');
+  if(E_GeV<=125){ cn.innerHTML='Below threshold: the collisions spray ordinary particles, but never enough concentrated energy to ripple the Higgs field. <b>Turn the energy up past 125 GeV.</b>'; }
+  else if(gotHiggs && hitTimer>0){ cn.innerHTML='<b style="color:var(--boson)">A Higgs boson!</b> The field rippled - one quantum of the Higgs field, conjured from collision energy. It\'ll vanish in ~10⁻²² seconds, but its decay debris proves the field was there. This happens in ~1 of a billion collisions.'; }
+  else { cn.innerHTML='Above 125 GeV: now the energy <em>can</em> ripple the Higgs field - but it\'s rare (~1 in a billion). Keep colliding and watch for the <span style="color:var(--boson)">amber ripple</span>.'; }
+  requestAnimationFrame(drawColl);
+}
+
+// interaction
+const cv=document.getElementById('cv');
+function setTarget(e){ const r=cv.getBoundingClientRect(); const cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+  const cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top; target=[cx*(DIMS.cv[0]/r.width), cy*(DIMS.cv[1]/r.height)]; }
+cv.addEventListener('mousemove',setTarget); cv.addEventListener('touchmove',e=>{setTarget(e);e.preventDefault();},{passive:false});
+function setPart(p){ part=p; ['photon','electron','top'].forEach(x=>document.getElementById('p_'+x).classList.toggle('on',x===p)); }
+document.getElementById('p_photon').onclick=()=>setPart('photon');
+document.getElementById('p_electron').onclick=()=>setPart('electron');
+document.getElementById('p_top').onclick=()=>setPart('top');
+document.getElementById('field').onclick=function(){ fieldOn=!fieldOn; this.classList.toggle('on',fieldOn); this.textContent='Higgs field: '+(fieldOn?'ON':'OFF'); };
+document.getElementById('energy').oninput=function(){ energy=(+this.value)/100; };
+document.getElementById('smash').onclick=function(){ smashing=!smashing; this.classList.toggle('on',smashing); this.textContent=smashing?'▶ colliding':'❚❚ paused'; };
+
+function tick(){ CLOCK++; requestAnimationFrame(tick); }
+requestAnimationFrame(tick);
+requestAnimationFrame(drawField);
+requestAnimationFrame(drawColl);
+</script>
+</body>
+</html>
