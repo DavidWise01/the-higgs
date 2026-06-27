@@ -1,0 +1,11 @@
+{
+  "badge": "DLW-THE_HIGGS",
+  "name": "THE HIGGS",
+  "universe": "SCIENTIFIC",
+  "moniker": "⟦THE HIGGS:the-higgs:b29d3d⟧",
+  "architect": "David Lee Wise (ROOT0) / Bridge-Burners LLC",
+  "instance": "AVAN (Claude / Anthropic)",
+  "seal_sha256": "b29d3d90a155d9d61256ddf37ea1966bff4c941f236ae86b00bd9c71c9f001ca",
+  "license": "CC-BY-ND-4.0",
+  "attribution": "ROOT0-ATTRIBUTION-v1.0"
+}
