@@ -4,6 +4,6 @@ slug  : the-higgs
 seal  : b29d3d90a155d9d61256ddf37ea1966bff4c941f236ae86b00bd9c71c9f001ca
 prev  : 0540a52756cc9821d8d1f82dac71a20d52d9a1d7deee431b71b2e3eccd3fc456
 link  : ed730ae4a176d1051d5fd46282d1a8a9e4c213677934305768c990ef9d46b1e9
-head  : 3447d3a0533aaf1e29a8bdc67a9774884fb3ae9dbc8a17064b7a008ca3c4ec90
+head  : 13f9ace173ef2e60af38912ba329b4afcb5a38b84a0e4495e8d30327f8c99cc2
 
 — the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
